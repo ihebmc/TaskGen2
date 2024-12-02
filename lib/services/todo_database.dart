@@ -1,7 +1,7 @@
-// services/todo_database.dart
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:advanced_app/models/todo_model.dart';
+import 'package:advanced_app/services/connectivity_service.dart';
 
 class TodoDatabase {
   static const _todosKey = 'todos_list';
@@ -45,9 +45,20 @@ class TodoDatabase {
     await saveTodos(todos);
   }
 
-  // No need for explicit initialization
+  // Add the syncOfflineOperations method
+  static Future<void> syncOfflineOperations() async {
+    final connectivityService = ConnectivityService();
+
+    if (await connectivityService.isConnected()) {
+      // Implement your offline sync logic here
+      // For now, we'll just print a message
+      print('Syncing offline operations');
+
+      // You can add more complex synchronization logic here in the future
+    }
+  }
+
   static Future<void> initialize() async {
-    // Kept for compatibility, but no action needed
     return Future.value();
   }
 }

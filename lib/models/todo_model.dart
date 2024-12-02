@@ -75,4 +75,10 @@ class TodoModel extends ChangeNotifier {
     await TodoDatabase.deleteTodo(todo.id!);
     await loadTodos();
   }
+
+  // In TodoModel or a connectivity listener
+  void checkAndSyncOfflineOperations() async {
+    await TodoDatabase.syncOfflineOperations();
+    await loadTodos(); // Refresh the list
+  }
 }
